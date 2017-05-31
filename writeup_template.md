@@ -38,9 +38,16 @@ You're reading it!
 
 ### Notebook Analysis
 #### 1. Run the functions provided in the notebook on test images (first with the test data provided, next on data you have recorded). Add/modify functions to allow for color selection of obstacles and rock samples.
-Here is an example of how to include an image in your writeup.
 
-![alt text][image1]
+I created the color_thresh function to allow for inverted creation. This way I am able to create a nav map as well as a obstacle map for later use. In addition I created a rock_thresh function that finds vaguely yellow things by looking for red and green greater than 160 and blue less than 128. 
+
+Navigation Image:
+![Navigation Thresholded Image][output/warped_threshed.jpg]  
+Obstacle Image:
+![Obstacle Image][output/warped_threshed_inv.jpg]  
+Rock Image:
+![Rock Image][output/warped_threshed_rock.jpg]
+
 
 #### 1. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result. 
 And another! 
