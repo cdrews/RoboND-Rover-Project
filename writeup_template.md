@@ -46,13 +46,13 @@ You're reading it!
 
 I created the color_thresh function to allow for inverted creation. This way I am able to create a nav map as well as a obstacle map for later use. In addition I created a rock_thresh function that finds vaguely yellow things by looking for red and green greater than 160 and blue less than 128. 
 
-|Original Image|
+| Original Image | | |
+ 
+| ![Calibration Rock][image3] |
 
-![Calibration Rock][image3]
+| Navigation Image | Obstacle Image | Rock Image |
 
-|Navigation Image|Dbstacle Image|Rock Image|
-
-![Navigation Thresholded Image][nav_image] | ![Obstacle Image][obst_image]| ![Rock Image][rock_image]
+| ![Navigation Thresholded Image][nav_image] | ![Obstacle Image][obst_image] | ![Rock Image][rock_image]
 
 
 #### 1. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result. 
