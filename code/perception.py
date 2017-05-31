@@ -23,8 +23,6 @@ def color_thresh(img, rgb_thresh=(160, 160, 160),inv=False):
     # Return the binary image
     return color_select
 
-# Identify pixels above the threshold
-# Threshold of RGB > 160 does a nice job of identifying ground pixels only
 def rock_thresh(img, rgb_thresh=(160, 160, 128)):
     # Create an array of zeros same xy size as img, but single channel
     color_select = np.zeros_like(img[:,:,0])
@@ -117,9 +115,9 @@ def perception_step(Rover):
     # 2) Apply perspective transform
     warped = perspect_transform(Rover.img, source, destination)
     # 3) Apply color threshold to identify navigable terrain/obstacles/rock samples 
-    nav_img   = color_thresh(warped,(128,128,160))
+    nav_img   = color_thresh(warped,(160,160,160))
     rock_img  = rock_thresh(warped,(160,160,128))
-    obst_img  = color_thresh(warped,(128,128,160),inv=True)
+    obst_img  = color_thresh(warped,(160,160,160),inv=True)
     # 4) Update Rover.vision_image (this will be displayed on left side of screen)
     #Rover.vision_image = warped
     Rover.vision_image[:,:,0] = obst_img * 200
@@ -153,7 +151,5 @@ def perception_step(Rover):
     # 8) Convert rover-centric pixel positions to polar coordinates
     # Update Rover pixel distances and angles
     Rover.nav_dist, Rover.nav_angles = to_polar_coords(x_pix_nav, y_pix_nav)
-    # Rover.nav_dists = rover_centric_pixel_distances
-    # Rover.nav_angles = rover_centric_angles
     
     return Rover
