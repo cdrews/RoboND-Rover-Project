@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 
 
-def color_thresh(img, rgb_thresh=(160, 160, 160),inv=False):
+def color_thresh(img, rgb_thresh=(120, 120, 150),inv=False):
     # Create an array of zeros same xy size as img, but single channel
     if inv:
         color_select = np.ones_like((img[:,:,0]>0))
@@ -115,9 +115,9 @@ def perception_step(Rover):
     # 2) Apply perspective transform
     warped = perspect_transform(Rover.img, source, destination)
     # 3) Apply color threshold to identify navigable terrain/obstacles/rock samples 
-    nav_img   = color_thresh(warped,(160,160,160))
+    nav_img   = color_thresh(warped,(120,120,150))
     rock_img  = rock_thresh(warped,(160,160,128))
-    obst_img  = color_thresh(warped,(160,160,160),inv=True)
+    obst_img  = color_thresh(warped,(120,120,150),inv=True)
     # 4) Update Rover.vision_image (this will be displayed on left side of screen)
     #Rover.vision_image = warped
     Rover.vision_image[:,:,0] = obst_img * 200
