@@ -94,6 +94,9 @@ def perspect_transform(img, src, dst):
     
     return warped
 
+#figure out if rover is level enough to use the picture for mapping
+def is_level(Rover):
+    return ( Rover.roll > 359.5 or Rover.roll < 0.5 ) and ( Rover.pitch > 359.5 or Rover.pitch < 0.5 )
 
 # Apply the above functions in succession and update the Rover state accordingly
 def perception_step(Rover):
@@ -144,9 +147,10 @@ def perception_step(Rover):
                                            Rover.yaw,
                                            Rover.worldmap.shape[0],10)
     # 7) Update Rover worldmap (to be displayed on right side of screen)
-    Rover.worldmap[y_pix_world_obst, x_pix_world_obst, 0] += 2
-    Rover.worldmap[y_pix_world_rock, x_pix_world_rock, 1] += 2
-    Rover.worldmap[y_pix_world_nav , x_pix_world_nav , 2] += 2
+    if is_level(Rover):
+        Rover.worldmap[y_pix_world_obst, x_pix_world_obst, 0] += 2
+        Rover.worldmap[y_pix_world_rock, x_pix_world_rock, 1] += 2
+        Rover.worldmap[y_pix_world_nav , x_pix_world_nav , 2] += 2
 
     # 8) Convert rover-centric pixel positions to polar coordinates
     # Update Rover pixel distances and angles

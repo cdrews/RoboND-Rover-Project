@@ -39,15 +39,14 @@ I populated the process_image function with the methods developed in the noteboo
 #### 1. Fill in the `perception_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and an explanation is provided in the writeup of how and why these functions were modified as they were.
 
 I started out with the default `percept_step` and `decision_step` and experimented with speed, throttle and steer parameters to speed up mapping and not lose map fidelity. Adjusting the threshold parameters was also necessary to get to the best results.
-I moderated the speed proportional to the mean distance of the navigatable space. The throttle is then set to the difference between desired and actual speed. 
+I moderated the speed proportional to the mean distance of the navigatable spacein front of the rover. The throttle is then set to the difference between desired and actual speed. 
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
 
 I used a slight 1.5 degree bias while steering in forward motion to make the robot go mostly right and thereby explore more of the terrain.
-I tried to regulate the rover speed by taking into account the average open distance in front of the robot. Unfortunately this in itself does not allow too much of an increase in mapping without the map fidelity suffering. 
+I tried to regulate the rover speed by taking into account the average open distance in front of the robot. This achieved a much higher speed, but it became necessary to filter only level images to build the map. Allowing only images that are within +/- 0.5 degree of horizontal greatly improved fidelity to >80%. 
 
-Improvements:
-* currently I can't increase the rover speed more or I lose map fidelity. To further increase speed I need to use the pitch angle to map only around neutral pitch
+Possible Improvements:
 * when the rover is in front of a narrow obstacle it sometimes gets stuck because the average distance and angles do not see the obstacle. One improvement I would try is to use a more narrow set of the angles and distances to avoid this situation.
 
 
