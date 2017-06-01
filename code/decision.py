@@ -18,7 +18,7 @@ def decision_step(Rover):
             if len(Rover.nav_angles) >= Rover.stop_forward:  
                 # If mode is forward, navigable terrain looks good 
                 # and velocity is below max, then throttle 
-                Rover.max_vel = 1.5 * np.mean(Rover.nav_dist)/100
+                Rover.max_vel = 4 * np.mean(Rover.nav_dist)/100
                 if Rover.vel < Rover.max_vel:
                     # Set throttle value to throttle setting
                     Rover.throttle = (Rover.max_vel - Rover.vel)
@@ -26,7 +26,7 @@ def decision_step(Rover):
                     Rover.throttle = 0
                 Rover.brake = 0
                 # Set steering to average angle clipped to the range +/- 15
-                Rover.steer = np.clip(np.mean(Rover.nav_angles * 180/np.pi)-1.5, -15, 15)
+                Rover.steer = np.clip(np.mean(Rover.nav_angles * 180/np.pi)-2.5, -15, 15)
             # If there's a lack of navigable terrain pixels then go to 'stop' mode
             elif len(Rover.nav_angles) < Rover.stop_forward:
                     # Set mode to "stop" and hit the brakes!
