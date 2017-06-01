@@ -60,3 +60,27 @@ A screenshot of a successful mapping run is below:
 ![alt text][screenshot]
 
 
+#### Reviewer Error Message
+
+`File "/Users/Desktop/cdrews-RoboND-Rover-Project-6c44e37/code/perception.py", line 135, in perception_step Rover.pos[0],Rover.pos[1], IndexError: index 1 is out of bounds for axis 0 with size 1`
+
+I do not get this error message. The line that fills the Rover.pos field is
+`Rover.pos = np.fromstring(data["position"], dtype=float, sep=',')` in `supporting_functions.py`. It should contain an nd.array of length 2. It could be that your version start with a None value. I added a check for None and length of Rover.pos to give better a better error if it still occurs on your system.
+
+When I run drive_rover.py on my ubuntu 16.04 system against Roversim.x86_64 I get clean output. See below.
+```
+$ python drive_rover.py 
+NOT recording this run ...
+(11405) wsgi starting up on http://0.0.0.0:4567
+(11405) accepted ('127.0.0.1', 43228)
+connect  6803ff9e48e44e0e86945247edf9f75f
+Current FPS: 1
+dict_keys(['sample_count', 'near_sample', 'samples_x', 'brake', 'samples_y', 'pitch', 'position', 'steering_angle', 'roll', 'picking_up', 'yaw', 'speed', 'throttle', 'image', 'fixed_turn'])
+speed = 0.0 position = [ 99.67   85.589] throttle = 0.0 steer_angle = 0.0 near_sample 0 picking_up 0
+Current FPS: 1
+dict_keys(['sample_count', 'near_sample', 'samples_x', 'brake', 'samples_y', 'pitch', 'position', 'steering_angle', 'roll', 'picking_up', 'yaw', 'speed', 'throttle', 'image', 'fixed_turn'])
+speed = 0.0 position = [ 99.67   85.589] throttle = 0.0 steer_angle = 0.0 near_sample 0 picking_up 0
+Current FPS: 1
+```
+
+
