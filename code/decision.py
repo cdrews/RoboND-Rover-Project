@@ -18,7 +18,7 @@ def decision_step(Rover):
             if len(Rover.nav_angles) >= Rover.stop_forward:  
                 # If mode is forward, navigable terrain looks good 
                 # and velocity is below max, then throttle 
-                Rover.max_vel = 4 * np.mean(Rover.nav_dist)/100
+                Rover.max_vel = 3 * np.mean(Rover.nav_dist)/100
                 if Rover.vel < Rover.max_vel:
                     # Set throttle value to throttle setting
                     Rover.throttle = (Rover.max_vel - Rover.vel)
